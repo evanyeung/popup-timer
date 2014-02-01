@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+        div {
+            margin: auto;
+            width: 200px;
+            text-align: center;
+        }
+        button {
+            background-color: green;
+            color: #eee;
+            border: 1px solid black;
+        }
+        .stopped {
+            background-color: red;
+            color: #eee;
+            border: 1px solid black;
+            border-radius: 5px;
+        }
+        </style>
+    </head>
+    <body>
+        <div>
+            <input type="text" id="interval" placeholder="Enter a time in minutes">
+            <button type="button" id="toggle-timer" class="stopped"><strong>Stopped</strong></button>
+        </div>
+        
+        <script>
+            function hasClass(elem, className)
+            {
+                return new RegExp(" " + className + " ").test(" " + elem.className + " ");
+            }
+            
+            function addClass(elem, className)
+            {
+                if(!hasClass(elem, className))
+                {
+                    elem.className += " " + className;
+                }
+            }
+            
+            function removeClass(elem, className)
+            {
+                if(hasClass(elem, className))
+                {
+                    elem.className = elem.className.replace(className, "");
+                }
+            }
+        
+            var toggle = document.getElementById("toggle-timer");
+            var intervalID = null
+            
+            toggle.onclick = function () {
+                if (hasClass(toggle, "stopped"))
+                {
+                    removeClass(toggle, "stopped");
+                    toggle.textContent = "Running";
+                    
+                    var interval = document.getElementById("interval").value;
+                    if (interval === "")
+                    {
+                        interval = 60*20; //20min
+                    }
+                    interval = parseInt(interval)*1000*60 //in minutes
+                    
+                    //set interval to alert in minutes
+                    //assigns the id of the interval process
+                    intervalID = window.setInterval(function() {
+                        alert("time");
+                    }, interval);
+                }
+                else
+                {
+                    addClass(toggle, "stopped");
+                    clearInterval(intervalID); //stop repetition
+                    toggle.textContent = "Stopped";
+                }
+            };
+        </script>
+    </body>
+</html>
