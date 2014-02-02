@@ -30,8 +30,16 @@ function getInterval(inputElem)
     return parseInt(interval)*1000*60; //in minutes
 }
 
+//displays modal overlay when time is up
+function toggleOverlay()
+{
+    var modal = document.getElementById("overlay");
+    modal.style.visibility = (modal.style.visibility == "visible")?"hidden":"visible";
+}
+
 var toggle = document.getElementById("toggle-timer");
 var input = document.getElementById("interval");
+var dismiss_btn = document.getElementById("dismiss");
 var intervalID = null;
 
 toggle.onclick = function () {
@@ -48,7 +56,8 @@ toggle.onclick = function () {
             //set interval to alert in minutes
             //assigns the id of the interval process
             intervalID = window.setInterval(function() {
-                alert("time");
+                //alert("time");
+                toggleOverlay();
             }, interval);
             input.disabled = true; //cannot change interval when running
         }
@@ -62,4 +71,8 @@ toggle.onclick = function () {
         toggle.blur();
         input.disabled = false; //re-enable field
     }
+};
+
+dismiss_btn.onclick = function() {
+    toggleOverlay();
 };
