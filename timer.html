@@ -35,10 +35,10 @@
             function getInterval(inputElem)
             {
                 var interval = inputElem.value;
-                if (!interval.match(/^\d+$/ig))
+                if ((interval === "") || (!interval.match(/^\d+$/ig)))
                 {
-                    alert("Did not enter an integer. Set to 1 min");
-                    interval = 1;
+                    alert("Please enter a positive integer");
+                    return -1;
                 }
                 return parseInt(interval)*1000*60; //in minutes
             }
@@ -50,19 +50,21 @@
             toggle.onclick = function () {
                 if (hasClass(toggle, "stopped"))
                 {
-                    removeClass(toggle, "stopped");
-                    addClass(toggle, "running");
-                    toggle.innerHTML = "<strong>Running</strong>";
-                    toggle.blur(); //for some reason js leaves it focused after changing class
-                    
                     var interval = getInterval(input);
+                    if (interval != -1)
+                    {
+                        removeClass(toggle, "stopped");
+                        addClass(toggle, "running");
+                        toggle.innerHTML = "<strong>Running</strong>";
+                        toggle.blur(); //for some reason js leaves it focused after changing class
                     
-                    //set interval to alert in minutes
-                    //assigns the id of the interval process
-                    intervalID = window.setInterval(function() {
-                        alert("time");
-                    }, interval);
-                    input.disabled = true; //cannot change interval when running
+                        //set interval to alert in minutes
+                        //assigns the id of the interval process
+                        intervalID = window.setInterval(function() {
+                            alert("time");
+                        }, interval);
+                        input.disabled = true; //cannot change interval when running
+                    }
                 }
                 else
                 {
