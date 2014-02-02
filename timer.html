@@ -2,27 +2,53 @@
 <html>
     <head>
         <style>
+        body {
+            background: #0074d9;
+        }
         div {
-            margin: auto;
-            width: 200px;
+            margin: 100px auto;
+            width: 300px;
             text-align: center;
+            font-family: verdana, sans-serif;
+            color: white;
+        }
+        input {
+            border: none;
+            border-radius: 3px;
+            text-align: center;
+            color: black;
+            font-weight: bold;
         }
         button {
-            background-color: green;
-            color: #eee;
-            border: 1px solid black;
+            display: block;
+            margin: 10px auto;
+            height: 30px;
+            width: 80px;
+            border: none;
+            border-radius: 3px;
+            color: white;
+        }
+        button:focus {
+            outline: none;
+        }
+        .running {
+            background-color: #01ff70;
+        }
+        .running:hover, .running:focus {
+            background-color: #01BF54;
         }
         .stopped {
-            background-color: red;
-            color: #eee;
-            border: 1px solid black;
-            border-radius: 5px;
+            background-color: #ff4136;
+        }
+        .stopped:hover, .stopped:focus {
+            background-color: #E83B31;
         }
         </style>
     </head>
     <body>
         <div>
-            <input type="text" id="interval" placeholder="Enter a time in minutes">
+            <p>A popup will alert you every set number of minutes</p>
+            <input type="text" id="interval">
             <button type="button" id="toggle-timer" class="stopped"><strong>Stopped</strong></button>
         </div>
         
@@ -47,34 +73,49 @@
                     elem.className = elem.className.replace(className, "");
                 }
             }
+            
+            function getInterval(inputElem)
+            {
+                var interval = inputElem.value;
+                if (interval.match(/^\d+$/ig))
+                {
+                    if (interval === "")
+                    {
+                        interval = 60*20; //20min default
+                    }
+                    return parseInt(interval)*1000*60; //in minutes
+                }
+            }
         
             var toggle = document.getElementById("toggle-timer");
-            var intervalID = null
+            var input = document.getElementById("interval");
+            var intervalID = null;
             
             toggle.onclick = function () {
                 if (hasClass(toggle, "stopped"))
                 {
                     removeClass(toggle, "stopped");
-                    toggle.textContent = "Running";
+                    addClass(toggle, "running");
+                    toggle.innerHTML = "<strong>Running</strong>";
+                    toggle.blur(); //for some reason js leaves it focused after changing class
                     
-                    var interval = document.getElementById("interval").value;
-                    if (interval === "")
-                    {
-                        interval = 60*20; //20min
-                    }
-                    interval = parseInt(interval)*1000*60 //in minutes
+                    var interval = getInterval(input);
                     
                     //set interval to alert in minutes
                     //assigns the id of the interval process
                     intervalID = window.setInterval(function() {
                         alert("time");
                     }, interval);
+                    input.disabled = true; //cannot change interval when running
                 }
                 else
                 {
+                    removeClass(toggle, "running");
                     addClass(toggle, "stopped");
                     clearInterval(intervalID); //stop repetition
-                    toggle.textContent = "Stopped";
+                    toggle.innerHTML = "<strong>Stopped</strong>";
+                    toggle.blur();
+                    input.disabled = false; //re-enable field
                 }
             };
         </script>
