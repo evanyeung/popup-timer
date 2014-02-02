@@ -1,0 +1,43 @@
+body {
+    background: #0074d9;
+}
+div {
+    margin: 100px auto;
+    width: 300px;
+    text-align: center;
+    font-family: verdana, sans-serif;
+    color: white;
+}
+input {
+    border: none;
+    border-radius: 3px;
+    text-align: center;
+    color: black;
+    font-family: verdana, sans-serif;
+    font-weight: bold;
+}
+button {
+    display: block;
+    margin: 10px auto;
+    height: 30px;
+    width: 80px;
+    border: none;
+    border-radius: 3px;
+    font-family: verdana, sans-serif;
+    color: white;
+}
+button:focus {
+    outline: none;
+}
+.running {
+    background-color: #01ff70;
+}
+.running:hover, .running:focus {
+    background-color: #01BF54;
+}
+.stopped {
+    background-color: #ff4136;
+}
+.stopped:hover, .stopped:focus {
+    background-color: #E83B31;
+}

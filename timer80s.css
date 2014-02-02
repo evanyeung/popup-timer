@@ -1,0 +1,51 @@
+body {
+    background: #333333;
+}
+div {
+    margin: 100px auto;
+    width: 300px;
+    text-align: center;
+    font-family: "Courier New", verdana, sans-serif;
+    color: white;
+}
+input {
+    border: none;
+    border-radius: 3px;
+    text-align: center;
+    color: #333333;
+    font-family: "Courier New", verdana, sans-serif;
+    font-weight: bold;
+    background: #ebebe4;
+}
+input:focus {
+    outline: none;
+    box-shadow: 0 0 5px #4D8EC7;
+}
+input:disabled {
+    background: #777777;
+}
+button {
+    display: block;
+    margin: 10px auto;
+    height: 30px;
+    width: 80px;
+    border: none;
+    border-radius: 3px;
+    font-family: "Courier New", verdana, sans-serif;
+    color: white;
+}
+button:focus {
+    outline: none;
+}
+.running {
+    background-color: #8FDEB2;
+}
+.running:hover, .running:focus {
+    background-color: #7ABD97;
+}
+.stopped {
+    background-color: #E8665C;
+}
+.stopped:hover, .stopped:focus {
+    background-color: #BF544C;
+}
