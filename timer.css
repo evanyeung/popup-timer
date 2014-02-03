@@ -5,8 +5,8 @@ body {
     padding: 0;
 }
 div {
-    margin: 100px auto;
-    width: 500px;
+    margin: 125px auto;
+    width: 625px;
     text-align: center;
     font-family: verdana, sans-serif;
     color: white;
@@ -20,9 +20,9 @@ input {
 }
 button {
     display: block;
-    margin: 10px auto;
-    height: 30px;
-    width: 80px;
+    margin: 13px auto;
+    height: 38px;
+    width: 100px;
     border: none;
     border-radius: 3px;
     font-family: verdana, sans-serif;
@@ -65,10 +65,10 @@ button:focus {
 }
 
 #overlay div {
-    margin: 100px auto;
-    padding: 10px;
-    width: 200px;
+    margin: 125px auto;
+    padding: 13px;
+    width: 250px;
     background-color: #0074d9;
-    border: 2px solid #FF851B;
+    border: 3px solid #FF851B;
     text-align: center;
 }
