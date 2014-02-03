@@ -35,7 +35,7 @@ function getInterval(inputElem)
 function toggleOverlay()
 {
     var modal = document.getElementById("overlay");
-    modal.style.visibility = (modal.style.visibility == "visible")?"hidden":"visible";
+    modal.style.visibility = (window.getComputedStyle(modal).visibility == "visible")?"hidden":"visible";
 }
 
 var toggle = document.getElementById("toggle-timer");
@@ -50,6 +50,7 @@ toggle.onclick = function () {
         var interval_min = getInterval(input_min) //is in seconds still
         var interval_sec = getInterval(input_sec);
         var interval = interval_min*60 + interval_sec
+        
         if ((interval_min != -1) && (interval_sec != -1) && (interval != 0))
         {
             removeClass(toggle, "stopped");
@@ -61,9 +62,15 @@ toggle.onclick = function () {
             //assigns the id of the interval process
             intervalID = window.setInterval(function() {
                 //alert("time");
-                toggleOverlay();
+                if (window.getComputedStyle(document.getElementById("overlay")).visibility == "hidden")
+                {
+                    toggleOverlay();
+                }
             }, interval);
-            input.disabled = true; //cannot change interval when running
+            
+            //cannot change interval when running
+            input_min.disabled = true;
+            input_sec.disabled = true;
         }
     }
     else
@@ -73,7 +80,10 @@ toggle.onclick = function () {
         clearInterval(intervalID); //stop repetition
         toggle.innerHTML = "<strong>Stopped</strong>";
         toggle.blur();
-        input.disabled = false; //re-enable field
+        
+         //re-enable fields
+        input_min.disabled = false;
+        input_sec.disabled = false;
     }
 };
 
