@@ -7,16 +7,16 @@ body {
 }
 div {
     margin: 100px auto;
-    width: 300px;
+    width: 500px;
     text-align: center;
     font-family: "Courier New", verdana, sans-serif;
-    color: white;
+    color: #eeeeee;
 }
 input {
     border: none;
     border-radius: 3px;
     text-align: center;
-    color: #333333;
+    color: #afa9a9;
     font-family: "Courier New", verdana, sans-serif;
     font-weight: bold;
     background: #ebebe4;
@@ -36,7 +36,7 @@ button {
     border: none;
     border-radius: 3px;
     font-family: "Courier New", verdana, sans-serif;
-    color: white;
+    color: #eeeeee;
 }
 button:focus {
     outline: none;

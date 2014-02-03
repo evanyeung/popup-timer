@@ -19,15 +19,16 @@ function removeClass(elem, className)
     }
 }
 
+//error checks the input and returns the interval in seconds
 function getInterval(inputElem)
 {
     var interval = inputElem.value;
-    if ((interval === "") || (!interval.match(/^\d+$/ig)))
+    if (!interval.match(/^\d+$/ig) && (interval != ""))
     {
         alert("Please enter a positive integer");
         return -1;
     }
-    return parseInt(interval)*1000*60; //in minutes
+    return parseInt(interval)*1000 || 0; //in seconds
 }
 
 //displays modal overlay when time is up
@@ -38,15 +39,18 @@ function toggleOverlay()
 }
 
 var toggle = document.getElementById("toggle-timer");
-var input = document.getElementById("interval");
+var input_min = document.getElementById("interval-min");
+var input_sec = document.getElementById("interval-sec");
 var dismiss_btn = document.getElementById("dismiss");
 var intervalID = null;
 
 toggle.onclick = function () {
     if (hasClass(toggle, "stopped"))
     {
-        var interval = getInterval(input);
-        if (interval != -1)
+        var interval_min = getInterval(input_min) //is in seconds still
+        var interval_sec = getInterval(input_sec);
+        var interval = interval_min*60 + interval_sec
+        if ((interval_min != -1) && (interval_sec != -1) && (interval != 0))
         {
             removeClass(toggle, "stopped");
             addClass(toggle, "running");
