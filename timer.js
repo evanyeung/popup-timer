@@ -25,16 +25,17 @@ function getInterval(inputElem)
     var interval = inputElem.value;
     if (!interval.match(/^\d+$/ig) && (interval != ""))
     {
-        alert("Please enter a positive integer");
+        toggleOverlay("Please input a positive integer");
         return -1;
     }
     return parseInt(interval)*1000 || 0; //in seconds
 }
 
 //displays modal overlay when time is up
-function toggleOverlay()
+function toggleOverlay(text)
 {
     var modal = document.getElementById("overlay");
+    modal.children[0].children[0].innerHTML = text;
     modal.style.visibility = (window.getComputedStyle(modal).visibility == "visible")?"hidden":"visible";
 }
 
@@ -64,7 +65,7 @@ toggle.onclick = function () {
                 //alert("time");
                 if (window.getComputedStyle(document.getElementById("overlay")).visibility == "hidden")
                 {
-                    toggleOverlay();
+                    toggleOverlay("Time!");
                 }
             }, interval);
             
